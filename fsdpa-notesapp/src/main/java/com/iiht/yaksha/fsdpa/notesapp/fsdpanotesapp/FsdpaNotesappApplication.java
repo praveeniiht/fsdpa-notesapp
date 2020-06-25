@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(scanBasePackages = "com.iiht.yaksha.fsdpa.notesapp")
 @EnableJpaRepositories(basePackages = "com.iiht.yaksha.fsdpa.notesapp.repo")
 @EntityScan("com.iiht.yaksha.fsdpa.notesapp.model")
-public class FsdpaNotesappApplication extends SpringBootServletInitializer {
+public class FsdpaNotesappApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FsdpaNotesappApplication.class, args);
