@@ -16,5 +16,4 @@ public class FsdpaNotesappApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FsdpaNotesappApplication.class, args);
 	}
-	
 }

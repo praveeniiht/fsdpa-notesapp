@@ -1,8 +1,10 @@
 package com.iiht.yaksha.fsdpa.notesapp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.iiht.yaksha.fsdpa.notesapp.model.Note;
 import com.iiht.yaksha.fsdpa.notesapp.service.NoteService;
@@ -25,10 +28,9 @@ public class NotesController {
 	
 	@Autowired
 	private NoteService noteService;
-	
+
 	@RequestMapping("/")
     public String home() {
-		
        return "Welcome to NotesApp- FSD Pre Assessment !!";
     }
 	
@@ -37,10 +39,10 @@ public class NotesController {
         return noteService.getAllNotes();
     }
 	
-	@GetMapping("/{Id}")
-    public Optional<Note> getNoteById(@PathVariable("Id") Long id) {
-        return noteService.getNoteById(id);
-    }
+	
+	  @GetMapping("/note/{Id}") public Optional<Note> getNoteById(@PathVariable("Id")
+	  Long id) { return noteService.getNoteById(id); }
+	 
 
 	@PostMapping("/addnote")
     public ResponseEntity<Note> createNote(@RequestBody Note note) {
@@ -55,5 +57,15 @@ public class NotesController {
 		noteService.deleteNote(note);
 		
 	}
-
+	
+	  @GetMapping("/{status}") 
+	  public List<Note>	  getAllByStatus(@PathVariable("status") String status) {
+		  	System.out.println(status); 
+		  	List<Note> list =noteService.getAllNotes();
+		  	List<Note> list1 = list.stream()
+		  						.filter(n->n.getStatus().equals(status))
+		  						.collect(Collectors.toList()); 
+		  	return list1 ; 
+	}
+	 
 }

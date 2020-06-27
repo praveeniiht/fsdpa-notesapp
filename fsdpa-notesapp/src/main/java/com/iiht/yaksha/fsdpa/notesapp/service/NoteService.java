@@ -10,4 +10,5 @@ public interface NoteService {
 	public Optional<Note> getNoteById(Long id);
 	public Note addNote(Note note);
 	public void deleteNote(Note note);
+	public List<Note> getAllNotesByStatus(String status);
 }

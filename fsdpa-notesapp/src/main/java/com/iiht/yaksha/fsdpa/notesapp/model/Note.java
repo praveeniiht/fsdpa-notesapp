@@ -11,6 +11,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name="notes")
 public class Note {
+	@Override
+	public String toString() {
+		return "Note [id=" + id + ", title=" + title + ", author=" + author + ", description=" + description
+				+ ", status=" + status + "]";
+	}
+
 	@Id
 	@Column
 	@GeneratedValue (strategy = GenerationType.IDENTITY)

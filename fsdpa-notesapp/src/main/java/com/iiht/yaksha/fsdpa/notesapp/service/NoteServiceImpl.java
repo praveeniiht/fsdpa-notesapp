@@ -40,6 +40,12 @@ public class NoteServiceImpl implements NoteService {
 		noteRepository.delete(note);
 		
 	}
+
+	@Override
+	public List<Note> getAllNotesByStatus(String status) {
+		// TODO Auto-generated method stub
+		return noteRepository.getAllNotesByStatus(status);
+	}
 	
 	
 
