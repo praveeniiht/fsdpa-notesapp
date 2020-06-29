@@ -1,0 +1,5 @@
+
+testAddNote=false
+testGetNoteById=true
+testGetAllNotesByStatus=false
+testGetAllNotes=true

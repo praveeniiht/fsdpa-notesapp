@@ -3,6 +3,7 @@ package com.iiht.yaksha.fsdpa.notesapp.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -20,9 +21,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.iiht.yaksha.fsdpa.notesapp.model.Note;
 import com.iiht.yaksha.fsdpa.notesapp.repo.NoteRepository;
 import com.iiht.yaksha.fsdpa.notesapp.testutils.*;
+import static com.iiht.yaksha.fsdpa.notesapp.testutils.TestUtils.*;
 
 @ExtendWith(SpringExtension.class)
-class NoteServiceTest {
+public class NoteServiceTest {
 	
 	@TestConfiguration
     static class NoteServiceImplTestContextConfiguration {
@@ -43,7 +45,7 @@ class NoteServiceTest {
         Note note1 = JsonUtils.createNote((long) 10009, "Praveen", "Java", "Done", "Object Oriented Programming");
         Note note2 = JsonUtils.createNote((long) 10010, "Kumar", "Docker", "On Going", "Orchestration Tool");
         Note note3 = JsonUtils.createNote((long) 10011, "Krishna", "Jenkins", "Done", "Continious Integration Tool");
-        
+     
         List<Note> allNotes = Arrays.asList(note1,note2,note3);
         List<Note> doneNotes = Arrays.asList(note1,note3);
 
@@ -52,36 +54,41 @@ class NoteServiceTest {
         Mockito.when(noteService.getNoteById((long) 10009)).thenReturn(Optional.of(note1));
         Mockito.when(noteService.getAllNotes()).thenReturn(allNotes);
      }
-
+    
 	@Test
-	void testGetAllNotes() {
+	void testGetAllNotes() throws IOException {
 		List<Note> fromDb = noteService.getAllNotes();
 		assertEquals(fromDb.size(),3);
+		int count= fromDb.size();
+		yakshaAssert(currentTest(),(count==3?true:false),businessTestFile);
 	}
 
 	@Test
-	void testGetNoteById() {
+	void testGetNoteById() throws IOException {
 	//	fail("Not yet implemented");
 	//	Note note1 = JsonUtils.createNote((long) 10009, "Praveen", "Java", "Done", "Object Oriented Programming");
 		Optional<Note> note2 = noteService.getNoteById((long) 10009);
-		
+		System.out.println("Note is :"+note2);
+		assertThat(note2);
+		yakshaAssert(currentTest(),(note2!=null?true:false),businessTestFile);
+	}
+	
+	@Test
+	void testAddNote() throws IOException {
+		Note note = JsonUtils.createNote((long) 10010, "Kumar", "Docker", "On Going", "Orchestration Tool");
+		Note note1 = noteService.addNote(note);
+		yakshaAssert(currentTest(),(note1!=null?true:false),businessTestFile);
 	}
 
 	@Test
-	void testAddNote() {
-	Note note = JsonUtils.createNote((long) 10010, "Kumar", "Docker", "On Going", "Orchestration Tool");
-	Note note1 = noteService.addNote(note);
-	assertThat(note1);
-	}
-
-	@Test
-	void testGetAllNotesByStatus() {
+	void testGetAllNotesByStatus() throws IOException {
 		 Note note1 = JsonUtils.createNote((long) 10009, "Praveen", "Java", "Done", "Object Oriented Programming");
 		 Note note3 = JsonUtils.createNote((long) 10011, "Krishna", "Jenkins", "Done", "Continious Integration Tool");
 		 List<Note> doneNotes = Arrays.asList(note1,note3);
 	     List<Note> list1 = noteService.getAllNotesByStatus("Done");
-	     assertThat(list1.containsAll(doneNotes));
-		
+	   //  assertThat(list1.containsAll(doneNotes));
+	     yakshaAssert(currentTest(),(doneNotes.containsAll(list1)?true:false),businessTestFile);
 	}
-
+	
 }
+

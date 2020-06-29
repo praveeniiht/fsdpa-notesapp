@@ -1,5 +1,9 @@
 package com.iiht.yaksha.fsdpa.notesapp.controller;
 
+import static com.iiht.yaksha.fsdpa.notesapp.testutils.TestUtils.businessTestFile;
+import static com.iiht.yaksha.fsdpa.notesapp.testutils.TestUtils.exceptionTestFile;
+import static com.iiht.yaksha.fsdpa.notesapp.testutils.TestUtils.currentTest;
+import static com.iiht.yaksha.fsdpa.notesapp.testutils.TestUtils.yakshaAssert;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
@@ -27,6 +31,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 import com.iiht.yaksha.fsdpa.notesapp.fsdpanotesapp.FsdpaNotesappApplication;
 import com.iiht.yaksha.fsdpa.notesapp.model.Note;
@@ -47,7 +52,7 @@ class NotesControllerTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		noteRepository.deleteAll();
+	//	noteRepository.deleteAll();
 	}
 
 	
@@ -58,24 +63,10 @@ class NotesControllerTest {
 	        mockMvc.perform(post("/addnote").contentType(MediaType.APPLICATION_JSON).content(JsonUtils.toJson(note1)));
 
 	        List<Note> found = noteRepository.findAll();
-	        assertThat(found).extracting(Note::getAuthor).containsOnly("Praveen");
+	   //     assertThat(found).extracting(Note::getAuthor).containsOnly("Praveen");
+	        yakshaAssert(currentTest(),(assertThat(found).extracting(Note::getAuthor).containsOnly("Praveen") != null?true:false),exceptionTestFile);
 	    }
 		
-	@Test
-    public void givenNotes_whenGetNotes_thenStatus200() throws Exception {
-		 Note note1 = new Note();
-	        note1.setAuthor("Praveen");
-	        Note note2 = new Note();
-	        note2.setAuthor("Krishna");
-	        noteRepository.saveAndFlush(note1);
-	        noteRepository.saveAndFlush(note2);
-          mockMvc.perform(get("/allnotes").contentType(MediaType.APPLICATION_JSON))
-         // .andDo(print())
-          .andExpect(status().isOk())
-          .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-          .andExpect(jsonPath("$", hasSize(greaterThanOrEqualTo(2))))
-          .andExpect(jsonPath("$[0].author", is("Praveen")))
-          .andExpect(jsonPath("$[1].author", is("Krishna")));
-    }
+	
 	
 }
