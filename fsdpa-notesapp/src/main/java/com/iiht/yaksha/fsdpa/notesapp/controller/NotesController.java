@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.iiht.yaksha.fsdpa.notesapp.exceptions.InvalidNoteStatusException;
 import com.iiht.yaksha.fsdpa.notesapp.model.Note;
 import com.iiht.yaksha.fsdpa.notesapp.service.NoteService;
 @RestController
@@ -58,14 +59,18 @@ public class NotesController {
 		
 	}
 	
-	  @GetMapping("/{status}") 
+	@GetMapping("/{status}") 
 	  public List<Note>	  getAllByStatus(@PathVariable("status") String status) {
+		  List<Note>  list1=null;
+		  List<Note> list=null;
+	  
 		  	System.out.println(status); 
-		  	List<Note> list =noteService.getAllNotes();
-		  	List<Note> list1 = list.stream()
+		  	list =noteService.getAllNotes();
+		  	list1 = list.stream()
 		  						.filter(n->n.getStatus().equals(status))
 		  						.collect(Collectors.toList()); 
-		  	return list1 ; 
-	}
-	 
+		  	
+		  return list1 ; 
+		 
+	}	 
 }

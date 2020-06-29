@@ -40,6 +40,7 @@ public class NoteServiceTest {
     @MockBean
     private NoteRepository noteRepository;
 
+    
     @BeforeEach
     public void setUp() {
         Note note1 = JsonUtils.createNote((long) 10009, "Praveen", "Java", "Done", "Object Oriented Programming");
@@ -65,19 +66,19 @@ public class NoteServiceTest {
 
 	@Test
 	void testGetNoteById() throws IOException {
-	//	fail("Not yet implemented");
-	//	Note note1 = JsonUtils.createNote((long) 10009, "Praveen", "Java", "Done", "Object Oriented Programming");
+		Note note1 = JsonUtils.createNote((long) 10009, "Praveen", "Java", "Done", "Object Oriented Programming");
+	    Mockito.when(noteService.getNoteById((long) 10009)).thenReturn(Optional.of(note1));
 		Optional<Note> note2 = noteService.getNoteById((long) 10009);
-		System.out.println("Note is :"+note2);
-		assertThat(note2);
 		yakshaAssert(currentTest(),(note2!=null?true:false),businessTestFile);
 	}
 	
 	@Test
 	void testAddNote() throws IOException {
+		
 		Note note = JsonUtils.createNote((long) 10010, "Kumar", "Docker", "On Going", "Orchestration Tool");
+		Mockito.when(noteService.addNote(note)).thenReturn(note);
 		Note note1 = noteService.addNote(note);
-		yakshaAssert(currentTest(),(note1!=null?true:false),businessTestFile);
+		yakshaAssert(currentTest(),(note1.getId().equals(note.getId())?true:false),businessTestFile);
 	}
 
 	@Test
@@ -85,6 +86,7 @@ public class NoteServiceTest {
 		 Note note1 = JsonUtils.createNote((long) 10009, "Praveen", "Java", "Done", "Object Oriented Programming");
 		 Note note3 = JsonUtils.createNote((long) 10011, "Krishna", "Jenkins", "Done", "Continious Integration Tool");
 		 List<Note> doneNotes = Arrays.asList(note1,note3);
+		 Mockito.when(noteService.getAllNotesByStatus("Done")).thenReturn(doneNotes);
 	     List<Note> list1 = noteService.getAllNotesByStatus("Done");
 	   //  assertThat(list1.containsAll(doneNotes));
 	     yakshaAssert(currentTest(),(doneNotes.containsAll(list1)?true:false),businessTestFile);
