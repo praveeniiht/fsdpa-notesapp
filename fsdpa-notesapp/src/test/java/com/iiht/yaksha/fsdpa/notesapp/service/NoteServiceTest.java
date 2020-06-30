@@ -91,6 +91,5 @@ public class NoteServiceTest {
 	   //  assertThat(list1.containsAll(doneNotes));
 	     yakshaAssert(currentTest(),(doneNotes.containsAll(list1)?true:false),businessTestFile);
 	}
-	
 }
 
