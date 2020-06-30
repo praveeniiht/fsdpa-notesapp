@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -22,8 +23,10 @@ public class Note {
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column
+	@Size(min=3,max=20)
 	private String title;
 	@Column
+	@Size(min=3,max=20)
 	private String author;
 	@Column
 	private String description;

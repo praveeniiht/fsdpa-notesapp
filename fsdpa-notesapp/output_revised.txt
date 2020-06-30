@@ -1,5 +1,0 @@
-
-testAddNote=true
-testGetNoteById=true
-testGetAllNotesByStatus=true
-testGetAllNotes=true

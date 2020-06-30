@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
 import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,7 +20,6 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
 import com.iiht.yaksha.fsdpa.notesapp.exceptions.InvalidNoteIdException;
 import com.iiht.yaksha.fsdpa.notesapp.exceptions.InvalidNoteStatusException;
 import com.iiht.yaksha.fsdpa.notesapp.model.Note;
@@ -41,7 +39,7 @@ public class NotesAppExceptionsTest {
             return new NoteServiceImpl();
         }
     }
-	
+
 	@Autowired
     private NoteService noteService;
 
@@ -69,5 +67,4 @@ public class NotesAppExceptionsTest {
 		  });
 	 yakshaAssert(currentTest(),(e!=null?true:false),exceptionTestFile);
 	}
-  
-}
+  }
