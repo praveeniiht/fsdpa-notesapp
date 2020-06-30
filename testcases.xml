@@ -1,0 +1,91 @@
+<test-cases>
+	<cases xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testGetNoteById</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>na</desc>
+	</cases>
+	<cases xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testAddNote</name>
+		<weight>3</weight>
+		<mandatory>true</mandatory>
+		<desc>na</desc>
+	</cases>
+	<cases xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testGetAllNotes</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>na</desc>
+	</cases>
+	<cases xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testGetAllNotesByStatus</name>
+		<weight>3</weight>
+		<mandatory>true</mandatory>
+		<desc>na</desc>
+	</cases>
+	<cases xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>givenOneNote_ThenAddOnlyOne</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>na</desc>
+	</cases>
+	<cases xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>given3Notes_thenDisplay3Notes</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>na</desc>
+	</cases>
+	<cases xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>exception</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testInvalidNoteId</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>na</desc>
+	</cases>
+	<cases xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>exception</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testInvalidStatus</name>
+		<weight>2</weight>
+		<mandatory>false</mandatory>
+		<desc>na</desc>
+	</cases>
+	<cases xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>boundary</test-case-type>
+		<expected-ouput>false</expected-ouput>
+		<name>testNotesTitleLength</name>
+		<weight>1</weight>
+		<mandatory>true</mandatory>
+		<desc>na</desc>
+	</cases>
+	<cases xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>exception</test-case-type>
+		<expected-ouput>false</expected-ouput>
+		<name>testAuthorNameLength</name>
+		<weight>1</weight>
+		<mandatory>false</mandatory>
+		<desc>na</desc>
+	</cases>
+</test-cases>
+
+
+
+
+
+
+
+
+
